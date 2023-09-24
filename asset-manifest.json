@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/bhad1-store/static/css/main.f313aaea.css",
-    "main.js": "/bhad1-store/static/js/main.8e2d6aa2.js",
+    "main.js": "/bhad1-store/static/js/main.14605a4a.js",
     "index.html": "/bhad1-store/index.html",
     "main.f313aaea.css.map": "/bhad1-store/static/css/main.f313aaea.css.map",
-    "main.8e2d6aa2.js.map": "/bhad1-store/static/js/main.8e2d6aa2.js.map"
+    "main.14605a4a.js.map": "/bhad1-store/static/js/main.14605a4a.js.map"
   },
   "entrypoints": [
     "static/css/main.f313aaea.css",
-    "static/js/main.8e2d6aa2.js"
+    "static/js/main.14605a4a.js"
   ]
 }
