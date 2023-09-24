@@ -9,16 +9,16 @@ function OpeningTime(props) {
         setOpeningTimesList(Object.values(props.openingTimes))
     }, [props.openingTimes])
     return (
-        <div className="opening-time" dir='rtl'>
+        <div className="opening-time" dir='rtl' onClick={() => {
+            props.setIsBoxOpen(!props.isBoxOpen)
+        }}>
             <div className='title' dir='rtl'>שעות פתיחה:</div>
             <div className='time-table'>
                 {openingTimesList.map((openingTime, index) => {
                     return <DayTimeLine openingTime={openingTime} key={hebrewDays[index]} day={hebrewDays[index]} />
                 })}
             </div>
-            <img className="expandArrow" src={expandArrow} style={{ transform: props.isBoxOpen ? "rotate(180deg)" : "" }} alt="none" onClick={() => {
-                props.setIsBoxOpen(!props.isBoxOpen)
-            }} />
+            <img className="expandArrow" src={expandArrow} style={{ transform: props.isBoxOpen ? "rotate(180deg)" : "", marginTop: props.isBoxOpen ? "5px" : "" }} alt="none" />
         </div>
     );
 }

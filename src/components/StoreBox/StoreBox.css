@@ -1,18 +1,34 @@
 .store-box {
     background-color: #f0f0f0;
-    width: 80%;
     border-radius: 5px;
     padding: 5%;
-    margin-bottom: 1vh;
+    margin-bottom: 3vh;
+    text-align: right;
+
 }
 
 .store-box-title {
     color: black;
     font-weight: bold;
+    margin: 0;
+    padding: 0;
     margin-bottom: 1vh;
 }
 
 .store-box-description {
     color: black;
     margin-bottom: 1vh;
+}
+
+.store-data {
+    display: grid;
+    grid-template-columns: 1fr 20vw;
+}
+
+.store-box-staus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    font-weight: bold;
 }

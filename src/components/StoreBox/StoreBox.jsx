@@ -62,9 +62,15 @@ function StoreBox(props) {
         }
     }, [props.openingTimes, closeTime, openTime])
     return (
-        <div className="store-box" dir='trl' style={{ height: !isBoxOpen ? "10vh" : "" }}>
-            <div className='store-box-title'>{props.name}</div>
-            <div className='store-box-description'>{props.description}</div>
+        <div className="store-box" dir='trl' >
+            <div className='store-data' dir='rtl'>
+                <div className='text-data'>
+                    <p className='store-box-title'>{props.name}</p>
+                    <p className='store-box-description'>{props.description}</p>
+                </div>
+                <div className='store-box-staus' style={{ backgroundColor: isOpen ? "#18803866" : "#D9302566" }}>{isOpen ? "פתוח" : "סגור"}</div>
+            </div>
+
             {isBoxOpen ? <OpeningTime name={props.name} setIsBoxOpen={setIsBoxOpen} isBoxOpen={isBoxOpen} openingTimes={props.openingTimes} /> : <BoxStatusLine nextStatus={isOpen ? closeTime : openTime} isOpen={isOpen} setIsBoxOpen={setIsBoxOpen} isBoxOpen={isBoxOpen} />}
         </div>
     );
