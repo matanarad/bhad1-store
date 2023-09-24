@@ -7,7 +7,7 @@ import Loading from './components/Loading/Loading';
 function App() {
   const [storesList, setStoresList] = useState([])
   useEffect(() => {
-    fetch('https://script.google.com/macros/s/AKfycbw7NQrDCqqYeOrJdWr8ai3-SPX8CcbxKckb2BWO77eR1KklME03YbUo6FJtmto3TWK2/exec')
+    fetch('https://script.google.com/macros/s/AKfycbySZYyZwnEv7ise5ShrUHYt23R7xJyTkr2FZKWfyN5NUgCG3Mtf6JmNv2d4Vw5cRt0G/exec')
       .then((response) => response.json())
       .then((data) => {
         setStoresList(data)
@@ -15,21 +15,12 @@ function App() {
 
   }, []);
   return (
-    // <div className="App">
-    //   {/* <div className='app-header'></div> */}
-    //   <div className='page-wrap'>
-    //     {storesList.length !== 0 ? storesList.map(store => {
-    //       return <StoreBox name={store.Name} description={store.Description} openingTimes={store.OpeningTimes} key={store.Name} />
-    //     }) : <div>loading...</div>}
-    //   </div>
-    //   <AppFooter />
 
-    // </div>
     <div className="App">
       <AppHeader />
       <div className='main'>
         {storesList.length !== 0 ? storesList.map(store => {
-          return <StoreBox name={store.Name} description={store.Description} openingTimes={store.OpeningTimes} key={store.Name} />
+          return <StoreBox name={store.Name} description={store.Description} openingTimes={store.OpeningTimes} phoneNumber={store.Phone} key={store.Name} />
         }) : <Loading />}
 
       </div>

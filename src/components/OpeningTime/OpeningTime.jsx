@@ -17,7 +17,9 @@ function OpeningTime(props) {
                 {openingTimesList.map((openingTime, index) => {
                     return <DayTimeLine openingTime={openingTime} key={hebrewDays[index]} day={hebrewDays[index]} />
                 })}
+                <div>טלפון לחירום - {props.phoneNumber}</div>
             </div>
+
             <img className="expandArrow" src={expandArrow} style={{ transform: props.isBoxOpen ? "rotate(180deg)" : "", marginTop: props.isBoxOpen ? "5px" : "" }} alt="none" />
         </div>
     );

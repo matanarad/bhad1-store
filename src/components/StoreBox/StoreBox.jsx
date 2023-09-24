@@ -71,7 +71,7 @@ function StoreBox(props) {
                 <div className='store-box-staus' style={{ backgroundColor: isOpen ? "#18803866" : "#D9302566" }}>{isOpen ? "פתוח" : "סגור"}</div>
             </div>
 
-            {isBoxOpen ? <OpeningTime name={props.name} setIsBoxOpen={setIsBoxOpen} isBoxOpen={isBoxOpen} openingTimes={props.openingTimes} /> : <BoxStatusLine nextStatus={isOpen ? closeTime : openTime} isOpen={isOpen} setIsBoxOpen={setIsBoxOpen} isBoxOpen={isBoxOpen} />}
+            {isBoxOpen ? <OpeningTime phoneNumber={props.phoneNumber} name={props.name} setIsBoxOpen={setIsBoxOpen} isBoxOpen={isBoxOpen} openingTimes={props.openingTimes} /> : <BoxStatusLine nextStatus={isOpen ? closeTime : openTime} isOpen={isOpen} setIsBoxOpen={setIsBoxOpen} isBoxOpen={isBoxOpen} />}
         </div>
     );
 }
