@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import StoreBox from './components/StoreBox/StoreBox';
 import AppFooter from './components/AppFooter/AppFooter';
 import AppHeader from './components/AppHeader/AppHeader';
+import Loading from './components/Loading/Loading';
 function App() {
   const [storesList, setStoresList] = useState([])
   useEffect(() => {
@@ -29,7 +30,7 @@ function App() {
       <div className='main'>
         {storesList.length !== 0 ? storesList.map(store => {
           return <StoreBox name={store.Name} description={store.Description} openingTimes={store.OpeningTimes} key={store.Name} />
-        }) : <div>loading...</div>}
+        }) : <Loading />}
 
       </div>
       <AppFooter />

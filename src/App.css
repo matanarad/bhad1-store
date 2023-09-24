@@ -7,7 +7,6 @@
 .main {
   flex-grow: 1;
   overflow-y: auto;
-  height: 0;
   background-color: #9EABCB;
   text-align: center;
   padding: 3vh 5vw 0 5vw;
