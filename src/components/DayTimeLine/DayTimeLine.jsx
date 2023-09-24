@@ -1,13 +1,24 @@
+import { useEffect, useState } from 'react';
 import './DayTimeLine.css';
 function DayTimeLine(props) {
+    const [openingTimeList, setOpeningTimeList] = useState([])
+    useEffect(() => {
+        setOpeningTimeList(props.openingTime.split(","))
+
+    }, [])
     return (
         <div className='DayTimeLine'>
-            <div>
-                {props.day}
+            <div >
+                {props.day} -
             </div>
             <div>
-                {props.openingTime}
+                {openingTimeList.map((time) => {
+                    return <div key={props.day + time}>
+                        {time}
+                    </div>
+                })}
             </div>
+
         </div>
     );
 }

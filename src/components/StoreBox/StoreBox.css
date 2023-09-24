@@ -31,4 +31,6 @@
     align-items: center;
     border-radius: 15px;
     font-weight: bold;
+    height: max-content;
+    padding: 3vh;
 }

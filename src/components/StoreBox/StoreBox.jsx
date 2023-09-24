@@ -25,35 +25,99 @@ function StoreBox(props) {
         return dayName
     }
 
-    const isStoreOpen = (openingTime, closingTime) => {
+    // const isStoreOpen = (timeRanges) => {
+    //     const now = new Date();
+    //     const currentHour = now.getHours();
+    //     const currentMinute = now.getMinutes();
+    //     const currentTime = currentHour * 60 + currentMinute;
+
+    //     const statusArray = [];
+
+    //     timeRanges.forEach((range) => {
+    //         const [openingTime, closingTime] = range.split('-');
+
+    //         const openingHour = parseInt(openingTime.split(':')[0], 10);
+    //         const openingMinute = parseInt(openingTime.split(':')[1], 10);
+    //         const openingTimeInMinutes = openingHour * 60 + openingMinute;
+
+    //         const closingHour = parseInt(closingTime.split(':')[0], 10);
+    //         const closingMinute = parseInt(closingTime.split(':')[1], 10);
+    //         const closingTimeInMinutes = closingHour * 60 + closingMinute;
+
+    //         if (currentTime >= openingTimeInMinutes && currentTime <= closingTimeInMinutes) {
+    //             statusArray.push(true);
+    //         } else {
+    //             statusArray.push(false);
+    //         }
+    //     });
+    //     if (statusArray.includes(true)) {
+    //         return true;
+    //     }
+    //     else {
+
+    //     }
+    // };
+    const isStoreOpen = (timeRanges) => {
         const now = new Date();
         const currentHour = now.getHours();
         const currentMinute = now.getMinutes();
-        const currentTime = currentHour * 60 + currentMinute; // Convert current time to minutes
+        const currentTime = currentHour * 60 + currentMinute;
 
-        const openingHour = parseInt(openingTime.split(':')[0], 10);
-        const openingMinute = parseInt(openingTime.split(':')[1], 10);
-        const openingTimeInMinutes = openingHour * 60 + openingMinute; // Convert opening time to minutes
+        let closestRange; // Don't initialize closestRange
 
-        const closingHour = parseInt(closingTime.split(':')[0], 10);
-        const closingMinute = parseInt(closingTime.split(':')[1], 10);
-        const closingTimeInMinutes = closingHour * 60 + closingMinute; // Convert closing time to minutes
+        let isOpen = false;
 
-        if (currentTime >= openingTimeInMinutes && currentTime <= closingTimeInMinutes) {
-            return true;
-        } else {
-            return false;
+        for (const range of timeRanges) {
+            const [openingTime, closingTime] = range.split('-');
+
+            const openingHour = parseInt(openingTime.split(':')[0], 10);
+            const openingMinute = parseInt(openingTime.split(':')[1], 10);
+            const openingTimeInMinutes = openingHour * 60 + openingMinute;
+
+            const closingHour = parseInt(closingTime.split(':')[0], 10);
+            const closingMinute = parseInt(closingTime.split(':')[1], 10);
+            const closingTimeInMinutes = closingHour * 60 + closingMinute;
+
+            if (currentTime >= openingTimeInMinutes && currentTime <= closingTimeInMinutes) {
+                isOpen = true;
+                closestRange = range;
+                break; // Store is open, so exit the loop
+            } else {
+                // Calculate the time difference between the current time and the opening time
+                const timeDifference = Math.abs(currentTime - openingTimeInMinutes);
+
+                // Check if this range is closer than the previously stored closestRange
+                if (closestRange === undefined || timeDifference < closestRange.timeDifference) {
+                    closestRange = {
+                        range,
+                        timeDifference,
+                    };
+                }
+            }
         }
-    }
+        return { isOpen, closestRange }; // Return an object with both values
+    };
+
+
+
 
     useEffect(() => {
         if (props.openingTimes !== undefined) {
-            let openingTimes = props.openingTimes[whatDayIsToday()]
-            if (openingTimes !== "סגור") {
-                const parts = openingTimes.split("-");
-                setOpenTime(parts[0])
-                setCloseTime(parts[1])
-                setIsOpen(isStoreOpen(openTime, closeTime))
+            let openingTimes = props.openingTimes[whatDayIsToday()].split(",")
+            if (openingTimes[0] !== "סגור") {
+                let statusArray = isStoreOpen(openingTimes)
+                if (statusArray.isOpen) {
+                    setIsOpen(true)
+                    let parts = statusArray.closestRange.split("-")
+                    setOpenTime(parts[0])
+                    setCloseTime(parts[1])
+                }
+                else {
+                    setIsOpen(false)
+                    let parts = statusArray.closestRange.range.split("-")
+                    setOpenTime(parts[0])
+                    setCloseTime(parts[1])
+                }
             }
             else {
                 setIsOpen(false)
