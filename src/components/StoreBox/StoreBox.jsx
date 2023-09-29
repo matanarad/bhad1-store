@@ -25,38 +25,6 @@ function StoreBox(props) {
         return dayName
     }
 
-    // const isStoreOpen = (timeRanges) => {
-    //     const now = new Date();
-    //     const currentHour = now.getHours();
-    //     const currentMinute = now.getMinutes();
-    //     const currentTime = currentHour * 60 + currentMinute;
-
-    //     const statusArray = [];
-
-    //     timeRanges.forEach((range) => {
-    //         const [openingTime, closingTime] = range.split('-');
-
-    //         const openingHour = parseInt(openingTime.split(':')[0], 10);
-    //         const openingMinute = parseInt(openingTime.split(':')[1], 10);
-    //         const openingTimeInMinutes = openingHour * 60 + openingMinute;
-
-    //         const closingHour = parseInt(closingTime.split(':')[0], 10);
-    //         const closingMinute = parseInt(closingTime.split(':')[1], 10);
-    //         const closingTimeInMinutes = closingHour * 60 + closingMinute;
-
-    //         if (currentTime >= openingTimeInMinutes && currentTime <= closingTimeInMinutes) {
-    //             statusArray.push(true);
-    //         } else {
-    //             statusArray.push(false);
-    //         }
-    //     });
-    //     if (statusArray.includes(true)) {
-    //         return true;
-    //     }
-    //     else {
-
-    //     }
-    // };
     const isStoreOpen = (timeRanges) => {
         const now = new Date();
         const currentHour = now.getHours();
@@ -100,8 +68,6 @@ function StoreBox(props) {
         }
         return { isOpen, closestRange }; // Return an object with both values
     };
-
-
 
 
     useEffect(() => {
