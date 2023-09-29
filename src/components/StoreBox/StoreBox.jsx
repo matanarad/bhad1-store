@@ -70,30 +70,33 @@ function StoreBox(props) {
         for (const range of timeRanges) {
             const [openingTime, closingTime] = range.split('-');
 
-            const openingHour = parseInt(openingTime.split(':')[0], 10);
-            const openingMinute = parseInt(openingTime.split(':')[1], 10);
-            const openingTimeInMinutes = openingHour * 60 + openingMinute;
+            try {
+                const openingHour = parseInt(openingTime.split(':')[0], 10);
+                const openingMinute = parseInt(openingTime.split(':')[1], 10);
+                const openingTimeInMinutes = openingHour * 60 + openingMinute;
+                const closingHour = parseInt(closingTime.split(':')[0], 10);
+                const closingMinute = parseInt(closingTime.split(':')[1], 10);
+                const closingTimeInMinutes = closingHour * 60 + closingMinute;
+                if (currentTime >= openingTimeInMinutes && currentTime <= closingTimeInMinutes) {
+                    isOpen = true;
+                    closestRange = range;
+                    break; // Store is open, so exit the loop
+                } else {
+                    // Calculate the time difference between the current time and the opening time
+                    const timeDifference = Math.abs(currentTime - openingTimeInMinutes);
 
-            const closingHour = parseInt(closingTime.split(':')[0], 10);
-            const closingMinute = parseInt(closingTime.split(':')[1], 10);
-            const closingTimeInMinutes = closingHour * 60 + closingMinute;
-
-            if (currentTime >= openingTimeInMinutes && currentTime <= closingTimeInMinutes) {
-                isOpen = true;
-                closestRange = range;
-                break; // Store is open, so exit the loop
-            } else {
-                // Calculate the time difference between the current time and the opening time
-                const timeDifference = Math.abs(currentTime - openingTimeInMinutes);
-
-                // Check if this range is closer than the previously stored closestRange
-                if (closestRange === undefined || timeDifference < closestRange.timeDifference) {
-                    closestRange = {
-                        range,
-                        timeDifference,
-                    };
+                    // Check if this range is closer than the previously stored closestRange
+                    if (closestRange === undefined || timeDifference < closestRange.timeDifference) {
+                        closestRange = {
+                            range,
+                            timeDifference,
+                        };
+                    }
                 }
+            } catch (error) {
+
             }
+
         }
         return { isOpen, closestRange }; // Return an object with both values
     };
@@ -114,9 +117,11 @@ function StoreBox(props) {
                 }
                 else {
                     setIsOpen(false)
-                    let parts = statusArray.closestRange.range.split("-")
-                    setOpenTime(parts[0])
-                    setCloseTime(parts[1])
+                    if (statusArray.closestRange !== undefined) {
+                        let parts = statusArray.closestRange.range.split("-")
+                        setOpenTime(parts[0])
+                        setCloseTime(parts[1])
+                    }
                 }
             }
             else {

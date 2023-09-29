@@ -5,7 +5,7 @@ function DayTimeLine(props) {
     useEffect(() => {
         setOpeningTimeList(props.openingTime.split(","))
 
-    }, [])
+    }, [props.openingTime, setOpeningTimeList])
     return (
         <div className='DayTimeLine'>
             <div >

@@ -15,6 +15,8 @@ function AppFooter() {
             <div className="text">
                 <p>אֱמֹר מְעַט וַעֲשֵׂה הַרְבֵּה</p>
                 <p>פותח על ידי פלוגה ב’ ברוש 82</p>
+                <p>V1.0.0</p>
+
             </div>
             <div className="right">
                 <div className="image-container">
